@@ -19,11 +19,12 @@ import java.util.Map;
 @RequestMapping
 public class PriceServiceController {
 
+    @Autowired
     private PriceService priceService = new PriceService();
     private JSONObject jsonObject;
     private PriceServiceBean priceServiceBean;
 
-    private void unwrapper(PriceServiceBean priceServiceBean) {
+    public void unwrapper(PriceServiceBean priceServiceBean) {
         this.jsonObject = priceServiceBean.getJsonObject();
     }
 

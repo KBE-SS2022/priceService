@@ -2,10 +2,11 @@ package priceService.api.service;
 
 
 import org.json.*;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
-
+@Service
 public class PriceService {
 
     public int getPrice(JSONObject pizza) throws JSONException {
