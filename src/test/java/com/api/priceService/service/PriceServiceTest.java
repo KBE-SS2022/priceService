@@ -1,14 +1,12 @@
-package priceService.api.service;
+package com.example.api.priceService.service;
 
+import com.example.api.priceService.service.PriceService;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
