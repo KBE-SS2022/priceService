@@ -1,13 +1,13 @@
-package priceService.api;
+package priceService;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Application {
+public class PriceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
-        System.out.println("Greetings");
+        SpringApplication.run(PriceApplication.class, args);
+        System.out.println("##### PRICE SERVICE SUCCESSFULLY STARTED #####");
     }
 }
