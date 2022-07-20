@@ -1,12 +1,10 @@
-package com.example.api.priceService.service;
+package com.api.priceService.service;
 
-import com.example.api.priceService.service.PriceService;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import priceService.api.dto.PizzaDTO;
+import priceService.api.service.PriceService;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,79 +12,29 @@ import static org.junit.jupiter.api.Assertions.*;
 class PriceServiceTest {
 
     PriceService priceService;
-    JSONObject jsonObject;
+    PizzaDTO pizzaDTO;
 
     @BeforeEach
-    public void init() throws JSONException {
-        String pizza = "{\n" +
-                "  \"id\": 0,\n" +
-                "  \"name\": \"Salami\",\n" +
-                "  \"ingredients\": [\n" +
-                "    {\n" +
-                "      \"id\": 0,\n" +
-                "      \"name\": \"Salami\",\n" +
-                "      \"brand\": \"string\",\n" +
-                "      \"countryOrigin\": \"string\",\n" +
-                "      \"nutritionScore\": \"string\",\n" +
-                "      \"calories\": 0,\n" +
-                "      \"amount\": 0,\n" +
-                "      \"weight\": 0,\n" +
-                "      \"price\": 14,\n" +
-                "      \"pizzas\": [\n" +
-                "        \"string\"\n" +
-                "      ]\n" +
-                "    },\n" +
-                "    {\n" +
-                "      \"id\": 0,\n" +
-                "      \"name\": \"Cheese\",\n" +
-                "      \"brand\": \"string\",\n" +
-                "      \"countryOrigin\": \"string\",\n" +
-                "      \"nutritionScore\": \"string\",\n" +
-                "      \"calories\": 0,\n" +
-                "      \"amount\": 0,\n" +
-                "      \"weight\": 0,\n" +
-                "      \"price\": 10,\n" +
-                "      \"pizzas\": [\n" +
-                "        \"string\"\n" +
-                "      ]\n" +
-                "    },\n" +
-                "    {\n" +
-                "      \"id\": 0,\n" +
-                "      \"name\": \"Bread\",\n" +
-                "      \"brand\": \"string\",\n" +
-                "      \"countryOrigin\": \"string\",\n" +
-                "      \"nutritionScore\": \"string\",\n" +
-                "      \"calories\": 0,\n" +
-                "      \"amount\": 0,\n" +
-                "      \"weight\": 0,\n" +
-                "      \"price\": 5,\n" +
-                "      \"pizzas\": [\n" +
-                "        \"string\"\n" +
-                "      ]\n" +
-                "    }\n" +
-                "  ]\n" +
-                "}";
+    public void init()  {
+        pizzaDTO = new PizzaDTO(1L, "Salami",
+                Map.of(10101L, 1.00, 10102L, 2.50, 10105L, 1.50));
+
         priceService = new PriceService();
-        jsonObject = new JSONObject(pizza);
     }
 
     @Test
-    public void getPizzaIdTest() throws JSONException {
-        assertEquals(0, priceService.getPizzaId(jsonObject));
+    public void getPizzaIdTest() {
+        assertEquals(1L, priceService.getPizzaId(pizzaDTO));
     }
 
     @Test
-    public void getPriceTest() throws JSONException {
-        assertEquals(29, priceService.getPrice(jsonObject));
+    public void getPriceTest() {
+        assertEquals(5.0, priceService.getPrice(pizzaDTO));
     }
 
     @Test
-    public void getPizzaPriceTest1() throws JSONException {
-        Map<Integer, Integer> idPriceMap = new HashMap<>();
-        idPriceMap.put(0, 29);
-        for(int i = 0; i < idPriceMap.size(); i++) {
-            assertEquals(idPriceMap.get(i), priceService.getPizzaPrice(jsonObject).get(i));
-        }
+    public void getPizzaPriceTest1() {
+        Map<Long,Double> idPriceMap = Map.of(1l, 5.0);
+        assertEquals(idPriceMap, priceService.getPizzaPrice(pizzaDTO));
     }
-
 }
