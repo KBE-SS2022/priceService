@@ -1,7 +1,7 @@
 package priceService.api.service;
 
 import org.springframework.stereotype.Service;
-import priceService.api.dto.PizzaDTO;
+import priceService.dto.PizzaDTO;
 
 import java.util.HashMap;
 import java.util.Map;

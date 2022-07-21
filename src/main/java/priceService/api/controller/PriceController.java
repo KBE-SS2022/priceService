@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import priceService.api.dto.PizzaDTO;
+import priceService.dto.PizzaDTO;
 import priceService.api.service.PriceService;
 
 import java.util.Map;
