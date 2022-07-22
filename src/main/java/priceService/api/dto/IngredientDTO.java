@@ -1,4 +1,4 @@
-package priceService.dto;
+package priceService.api.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
