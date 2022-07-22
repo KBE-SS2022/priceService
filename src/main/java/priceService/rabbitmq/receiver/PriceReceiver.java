@@ -8,6 +8,7 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 import priceService.api.controller.PriceController;
 import priceService.dto.PizzaDTO;
+import priceService.rabbitmq.MyAcknowledgement;
 import priceService.rabbitmq.config.Constant;
 
 import java.io.IOException;
@@ -20,8 +21,8 @@ public class PriceReceiver {
    PriceController priceController;
 
    @RabbitListener(queues = Constant.GET_PRICE_QUEUE)
-   public Map<Long,Double> getPrice(@Payload PizzaDTO pizzaDTO, Channel channel) throws IOException {
-      channel.basicAck(1L, true);
+   public Map<Long,Double> getPrice(@Payload PizzaDTO pizzaDTO, Channel channel) {
+      MyAcknowledgement.setAcknowledgement(channel, 1L, true);
       ResponseEntity<Map<Long,Double>> entity;
       entity = priceController.getPizzaPrice(pizzaDTO);
       Map<Long,Double> pizzaPrice = entity.getBody();

@@ -20,4 +20,4 @@ COPY --from=build ${DEPENDENCY}/BOOT-INF/classes /app
 
 ENTRYPOINT ["java","-cp","app:app/lib/*","priceService.PriceApplication"]
 
-EXPOSE 8083
+EXPOSE 9003
