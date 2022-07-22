@@ -1,14 +1,17 @@
 package priceService.rabbitmq.receiver;
 
+import com.rabbitmq.client.Channel;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 import priceService.api.controller.PriceController;
-import priceService.api.dto.PizzaDTO;
+import priceService.dto.PizzaDTO;
+import priceService.rabbitmq.MyAcknowledgement;
 import priceService.rabbitmq.config.Constant;
 
+import java.io.IOException;
 import java.util.Map;
 
 @Component
@@ -18,14 +21,10 @@ public class PriceReceiver {
    PriceController priceController;
 
    @RabbitListener(queues = Constant.GET_PRICE_QUEUE)
-   public Map<Long,Double> getPrice(@Payload PizzaDTO pizzaDTO) {
+   public Map<Long,Double> getPrice(@Payload PizzaDTO pizzaDTO, Channel channel) {
+      MyAcknowledgement.setAcknowledgement(channel, 1L, true);
       ResponseEntity<Map<Long,Double>> entity;
-      try {
-         entity = priceController.getPizzaPrice(pizzaDTO);
-      } catch (Exception e) {
-         System.out.println(e.getMessage());
-         return null;
-      }
+      entity = priceController.getPizzaPrice(pizzaDTO);
       Map<Long,Double> pizzaPrice = entity.getBody();
       return pizzaPrice;
    }

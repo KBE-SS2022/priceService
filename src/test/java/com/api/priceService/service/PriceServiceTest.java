@@ -2,7 +2,7 @@ package com.api.priceService.service;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import priceService.api.dto.PizzaDTO;
+import priceService.dto.PizzaDTO;
 import priceService.api.service.PriceService;
 
 import java.util.Map;
